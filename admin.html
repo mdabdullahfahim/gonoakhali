@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b3a8f">
+<title>Go-নোয়াখালী | অ্যাডমিন প্যানেল</title>
+<link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c1f3f;--dk:#0b3a8f;--bl:#2f80ff;--amb:#ffb020;--bg:#f1f5fc;--mut:#62779b;--line:#e0e8f5;--red:#e04848}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
+button,input{font:inherit;color:inherit}
+.hide{display:none!important}
+.top{background:linear-gradient(140deg,var(--dk),var(--bl));color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
+.top img{height:36px;border-radius:9px}.top b{flex:1;font-size:1.1rem}
+.w{max-width:900px;margin:0 auto;padding:14px}
+.c{background:#fff;border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 2px 12px #0b3a8f14}
+h2{font-size:1.1rem;color:var(--dk);margin-bottom:10px}
+input.t{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;margin:4px 0 10px;background:#fff;outline:none}
+input.t:focus{border-color:var(--bl)}
+.btn{background:var(--dk);color:#fff;border:0;border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:600;width:100%}
+.btn.r{background:#fdeaea;color:var(--red)}.btn.o{background:#fff;color:var(--dk);border:1.5px solid var(--dk)}.btn.sm{width:auto;padding:8px 16px;border-radius:30px}
+.btn+.btn{margin-top:8px}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#fff;border-radius:18px;padding:14px 8px;text-align:center;box-shadow:0 2px 12px #0b3a8f14}
+.stat b{display:block;font-size:1.7rem;color:var(--dk);line-height:1.2}.stat small{color:var(--mut)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:8px}
+.tab{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:30px;padding:6px 16px;cursor:pointer;font-weight:500}
+.tab.on{background:var(--dk);border-color:var(--dk);color:#fff}
+.u{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.u:last-child{border:0}
+.u img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:#cfdcf5;border:2px solid var(--amb);flex:none}
+.u div{min-width:0;word-break:break-word}
+.tag{display:inline-block;border-radius:20px;padding:0 10px;font-size:.82rem;font-weight:600;background:#dfe9ff;color:var(--dk)}
+.tag.p{background:#fff3d6;color:#8a5a00}
+.mut{color:var(--mut);font-size:.92rem}
+.prev{border:1.5px dashed #b4c6e8;border-radius:16px;overflow:hidden;margin:6px 0 12px;text-align:center}
+.prev .hd{background:linear-gradient(140deg,var(--dk),var(--bl));color:#fff;padding:10px}
+.prev img{width:100%;max-height:200px;object-fit:cover;display:block}
+#login{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:20px}
+#login img{width:90px;border-radius:22px}
+</style>
+</head>
+<body>
+<div class="top"><img src="logo.png" alt=""><b>Go-নোয়াখালী অ্যাডমিন</b><button id="out" class="btn o sm hide">লগআউট</button></div>
+
+<div class="w">
+  <div id="lg" class="c" style="max-width:420px;margin:30px auto;text-align:center">
+    <img src="logo.png" alt="" style="width:80px;border-radius:20px;margin-bottom:8px">
+    <h2>অ্যাডমিন লগইন</h2>
+    <p class="mut" style="margin-bottom:12px">শুধুমাত্র অনুমোদিত Google অ্যাকাউন্ট দিয়ে প্রবেশ করা যাবে।</p>
+    <button id="in" class="btn">Google দিয়ে লগইন করুন</button>
+    <p id="er" style="color:var(--red);margin-top:8px"></p>
+  </div>
+
+  <div id="ad" class="hide">
+    <div class="stats">
+      <div class="stat"><b id="sAll">০</b><small>মোট ব্যবহারকারী</small></div>
+      <div class="stat"><b id="sD">০</b><small>🧑‍✈️ চালক</small></div>
+      <div class="stat"><b id="sP">০</b><small>🧍 যাত্রী</small></div>
+    </div>
+
+    <div class="c">
+      <h2>📢 নোটিশ</h2>
+      <input class="t" id="nt" placeholder="নোটিশের শিরোনাম (বাংলায়)" maxlength="120">
+      <input class="t" id="ni" placeholder="ছবির লিংক (ঐচ্ছিক) — https://.../ছবি.jpg বা .png">
+      <div class="prev hide" id="pv"><div class="hd" id="pvt"></div><img id="pvi" alt=""></div>
+      <div class="row"><button class="btn o" id="pvb">👁️ প্রিভিউ</button><button class="btn" id="np">চালু করুন</button></div>
+      <button class="btn r" id="nd">নোটিশ মুছে ফেলুন</button>
+      <p id="ns" class="mut" style="margin-top:8px"></p>
+      <p class="mut" style="margin-top:6px">বর্তমান অবস্থা: <b id="nst">লোড হচ্ছে...</b></p>
+    </div>
+
+    <div class="c">
+      <h2>👥 ব্যবহারকারী</h2>
+      <input class="t" id="sq" placeholder="🔍 নাম, নম্বর বা ইমেইল দিয়ে খুঁজুন">
+      <div class="tabs">
+        <div class="tab on" data-f="all">সবাই</div><div class="tab" data-f="driver">🧑‍✈️ চালক</div><div class="tab" data-f="passenger">🧍 যাত্রী</div>
+      </div>
+      <div id="ul"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,doc,setDoc,onSnapshot,collection}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyDV9KJhYmEjHYt6aNkA1daJEPQieADmSY0",authDomain:"go-to-noakhali.firebaseapp.com",projectId:"go-to-noakhali",storageBucket:"go-to-noakhali.firebasestorage.app",messagingSenderId:"1006423475898",appId:"1:1006423475898:web:b716dccb01605615bde483"});
+const auth=getAuth(app),db=getFirestore(app),$=i=>document.getElementById(i);
+const ADMINS=["abdullahfahim139549@gmail.com","mdabdullahfahim.bd@gmail.com","abdullahfahim01823281@gmail.com"];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const bn=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+let users=[],f="all",started=false;
+
+$("in").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("er").textContent="লগইন ব্যর্থ হয়েছে।"}};
+$("out").onclick=()=>signOut(auth);
+
+onAuthStateChanged(auth,u=>{
+  const ok=!!u&&ADMINS.includes(u.email);
+  $("lg").classList.toggle("hide",ok);$("ad").classList.toggle("hide",!ok);$("out").classList.toggle("hide",!u);
+  $("er").textContent=u&&!ok?"দুঃখিত, আপনি অ্যাডমিন নন।":"";
+  if(ok&&!started){started=true;listen()}
+});
+
+function listen(){
+  onSnapshot(collection(db,"users"),s=>{users=s.docs.map(d=>d.data());draw()});
+  onSnapshot(doc(db,"notice","current"),s=>{
+    const n=s.data();
+    $("nst").textContent=n&&n.active&&n.title?"✅ চালু আছে — “"+n.title+"”":"❌ কোনো নোটিশ চালু নেই";
+  });
+}
+
+function draw(){
+  const q=$("sq").value.trim().toLowerCase();
+  const l=users.filter(u=>(f=="all"||u.role==f)&&(!q||[u.name,u.phone,u.email].some(x=>String(x||"").toLowerCase().includes(q))));
+  $("sAll").textContent=bn(users.length);
+  $("sD").textContent=bn(users.filter(u=>u.role=="driver").length);
+  $("sP").textContent=bn(users.filter(u=>u.role=="passenger").length);
+  $("ul").innerHTML=l.length?l.map(u=>`<div class="u"><img src="${esc(u.photo)||"logo.png"}" alt=""><div><b>${esc(u.name)}</b> <span class="tag ${u.role=="passenger"?"p":""}">${u.role=="driver"?"🧑‍✈️ চালক":u.role=="passenger"?"🧍 যাত্রী":"নির্ধারিত নয়"}</span><br><span class="mut">📞 ${esc(u.phone)||"—"}</span><br><span class="mut">✉️ ${esc(u.email)}</span></div></div>`).join(""):`<p class="mut" style="padding:14px 0;text-align:center">কোনো ব্যবহারকারী পাওয়া যায়নি</p>`;
+}
+$("sq").oninput=draw;
+document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{f=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x==b));draw()});
+
+/* ---------- notice ---------- */
+$("pvb").onclick=()=>{
+  const t=$("nt").value.trim(),i=$("ni").value.trim();
+  $("pv").classList.remove("hide");$("pvt").textContent=t||"(শিরোনাম নেই)";
+  $("pvi").style.display=i?"block":"none";if(i)$("pvi").src=i;
+};
+$("np").onclick=async()=>{
+  const t=$("nt").value.trim();if(!t){$("ns").textContent="⚠️ শিরোনাম দিন।";return}
+  try{
+    await setDoc(doc(db,"notice","current"),{title:t,image:$("ni").value.trim(),active:true,ts:Date.now()});
+    $("ns").textContent="✅ নোটিশ চালু হয়েছে। সবাই দেখতে পাবেন।";
+  }catch(e){$("ns").textContent="ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"}
+};
+$("nd").onclick=async()=>{
+  if(!confirm("নোটিশটি মুছে ফেলবেন?"))return;
+  try{
+    await setDoc(doc(db,"notice","current"),{title:"",image:"",active:false,ts:Date.now()});
+    $("nt").value="";$("ni").value="";$("pv").classList.add("hide");
+    $("ns").textContent="নোটিশ মুছে ফেলা হয়েছে।";
+  }catch(e){$("ns").textContent="ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"}
+};
+</script>
+</body>
+</html>

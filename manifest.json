@@ -1,0 +1,16 @@
+{
+  "name": "Go-নোয়াখালী",
+  "short_name": "Go-নোয়াখালী",
+  "description": "নোয়াখালীর পথে বিনামূল্যের রাইড শেয়ারিং",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "bn",
+  "background_color": "#0b3a8f",
+  "theme_color": "#0b3a8f",
+  "icons": [
+    {"src": "logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}

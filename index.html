@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b3a8f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Go-নোয়াখালী">
+<title>Go-নোয়াখালী | রাইড শেয়ারিং</title>
+<link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c1f3f;--em:#1456c9;--em2:#2f80ff;--dk:#0b3a8f;--amb:#ffb020;--bg:#f1f5fc;--mut:#62779b;--line:#e0e8f5;--red:#e04848;--sh:0 6px 24px #0b3a8f2e}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+button,input,textarea{font:inherit;color:inherit}
+.hide{display:none!important}
+a{color:inherit}
+/* header */
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 16px;background:#ffffffd9;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top img.lg{height:36px;border-radius:9px}.top b{flex:1;font-size:1.15rem;color:var(--dk)}
+.avb{width:42px;height:42px;border-radius:50%;border:2.5px solid var(--amb);padding:0;overflow:hidden;background:#cfdcf5;cursor:pointer}
+.avb img{width:100%;height:100%;object-fit:cover}
+/* hero */
+.hero{background:linear-gradient(140deg,var(--dk),var(--em2));color:#fff;padding:22px 16px 74px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:#ffffff14}
+.hero:before{width:220px;height:220px;right:-60px;top:-70px}.hero:after{width:140px;height:140px;left:-40px;bottom:-50px}
+.hero h1{font-size:1.55rem;line-height:1.3;position:relative}.hero p{opacity:.85;position:relative;margin-top:2px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px}
+/* search */
+.srch{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:8px;margin-top:-52px;position:relative;z-index:2}
+.fld{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;cursor:pointer;position:relative}
+.fld:active{background:var(--bg)}.fld small{color:var(--mut);display:block;font-size:.78rem;line-height:1.2}.fld b{font-weight:600;display:block;line-height:1.3}
+.fld>div{flex:1;min-width:0}.fld .ph{color:#9aaccb;font-weight:500}
+.dot{width:12px;height:12px;border-radius:50%;border:3px solid var(--em2);flex:none}.dot.e{border-color:var(--amb);background:var(--amb)}
+.swap{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--line);cursor:pointer;font-size:1.1rem;z-index:3}
+.sep{height:1px;background:var(--line);margin:0 14px 0 38px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:16px 2px 4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:30px;padding:6px 14px;cursor:pointer;font-weight:500}
+.chip.on{background:var(--dk);border-color:var(--dk);color:#fff}
+.sec{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.sec h2{font-size:1.2rem}
+.info{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--amb);color:#222;font-size:.78rem;font-weight:700;align-items:center;justify-content:center;cursor:pointer;margin-left:6px;vertical-align:middle}
+/* trip card */
+.tc{display:flex;background:#fff;border-radius:20px;box-shadow:0 2px 12px #0b3a8f14;margin-bottom:12px;overflow:hidden;cursor:pointer;transition:transform .15s}
+.tc:active{transform:scale(.985)}
+.vi{width:84px;flex:none;background:linear-gradient(170deg,#e6efff,#cfe0ff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 4px;text-align:center}
+.vi span{font-size:2.3rem;line-height:1}.vi small{font-size:.75rem;font-weight:600;color:var(--dk)}
+.tb{flex:1;padding:12px 14px;min-width:0}
+.rt{position:relative;padding-left:22px}
+.rt:before{content:"";position:absolute;left:5px;top:12px;bottom:14px;border-left:2px dashed #b4c6e8}
+.rt div{position:relative;font-weight:600;line-height:1.35;padding:2px 0}
+.rt div+div{margin-top:8px}
+.rt div:before{content:"";position:absolute;left:-22px;top:7px;width:12px;height:12px;border-radius:50%;border:3px solid var(--em2);background:#fff}
+.rt div+div:before{border-color:var(--amb);background:var(--amb)}
+.mr{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pill{background:var(--bg);border-radius:20px;padding:3px 11px;font-size:.9rem;color:var(--dk);font-weight:500}
+.pill.tm{background:#e3edff;color:var(--dk);font-weight:700;font-size:1rem}.nb{display:flex;gap:8px;flex-wrap:wrap}.nb .btn{margin:12px 0 0}
+.pill.s{background:#fff3d6;color:#8a5a00}.pill.g{background:#dfe9ff}
+.empty{text-align:center;padding:36px 16px;color:var(--mut)}.empty span{font-size:3rem;display:block}
+/* fab */
+.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom));z-index:25;background:var(--dk);color:#fff;border:0;border-radius:40px;padding:14px 26px;font-weight:700;font-size:1.05rem;box-shadow:0 10px 30px #0b3a8f66;cursor:pointer;display:flex;gap:8px;align-items:center}
+.fab i{background:var(--amb);color:#222;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal}
+.btn{background:var(--dk);color:#fff;border:0;border-radius:14px;padding:13px 18px;cursor:pointer;font-weight:600;width:100%;display:block;text-align:center;text-decoration:none}
+.btn.y{background:var(--amb);color:#222}.btn.o{background:#fff;color:var(--dk);border:1.5px solid var(--dk)}.btn.r{background:#fdeaea;color:var(--red)}.btn.sm{width:auto;padding:8px 16px;border-radius:30px}
+.btn+.btn{margin-top:8px}
+/* sheets */
+.ov{position:fixed;inset:0;background:#06142e99;z-index:60;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.2s}
+.ov.z2{z-index:70}.ov.on{opacity:1;visibility:visible}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:26px 26px 0 0;padding:10px 18px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;transform:translateY(40px);transition:.25s}
+.ov.on .sheet{transform:none}
+.grab{width:44px;height:5px;border-radius:5px;background:#d0dcf0;margin:0 auto 14px}
+.sheet h3{font-size:1.25rem;margin-bottom:12px}
+@media(min-width:600px){.ov{align-items:center}.sheet{border-radius:26px}}
+.f2{background:var(--bg);border-radius:14px;margin-bottom:8px}
+input.t,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin:6px 0 10px;outline:none}
+input.t:focus,textarea:focus{border-color:var(--em2)}
+label.l{font-weight:600;font-size:.92rem;display:block;margin:10px 0 2px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 4px}
+.op{border:2px solid var(--line);border-radius:16px;padding:10px 2px;text-align:center;cursor:pointer;background:#fff;font-size:.8rem;line-height:1.2}
+.op span{font-size:1.7rem;display:block;margin-bottom:2px}.op.on{border-color:var(--em2);background:#e8f0ff;font-weight:600}
+.op.big{font-size:1.2rem;font-weight:700;padding:12px 2px}
+.row{display:flex;gap:10px}.row>div{flex:1}
+.pi{padding:13px 8px;border-bottom:1px solid var(--line);cursor:pointer}.pi:active{background:var(--bg)}.pi.new{color:var(--em);font-weight:600}
+.pf{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.av{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid var(--amb);background:#cfdcf5;flex:none}
+.mut{color:var(--mut)}.st{color:var(--amb);letter-spacing:2px}
+.stars{font-size:2.2rem;color:var(--amb);cursor:pointer;text-align:center;letter-spacing:4px}
+/* reviews */
+.rvc{background:#fff;border-radius:20px;padding:14px 0;box-shadow:0 2px 12px #0b3a8f14;overflow:hidden}
+.avg{display:flex;align-items:center;gap:12px;padding:0 16px 10px}.avg b{font-size:2rem;color:var(--dk)}
+.mq{overflow:hidden;white-space:nowrap}.mq .in{display:inline-block;animation:mv 45s linear infinite}.mq:hover .in{animation-play-state:paused}
+@keyframes mv{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+.rv{display:inline-flex;gap:10px;background:var(--bg);border-radius:16px;padding:12px 14px;margin-right:12px;white-space:normal;width:280px;vertical-align:top}
+.rv img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none}.rv q{display:block;font-size:.93rem;margin-top:2px;quotes:"“" "”"}
+/* about */
+.about{margin-top:26px;background:var(--dk);color:#dbe6fb;padding:26px 16px calc(110px + env(safe-area-inset-bottom));font-size:.93rem}
+.about .in{max-width:760px;margin:0 auto}.about h4{color:#fff;font-size:1.1rem;margin-bottom:6px}
+.about p{margin-bottom:10px}.about a{color:var(--amb)}
+.soc{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.soc a{background:#ffffff1f;border-radius:30px;padding:8px 16px;text-decoration:none;color:#fff;font-weight:500}
+/* login */
+#login{min-height:100vh;background:linear-gradient(150deg,var(--dk),var(--em2));color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:10px}
+#login img{width:104px;border-radius:26px;box-shadow:0 12px 30px #0004}
+#login h1{font-size:2rem}#login p{opacity:.9;max-width:320px}
+.gb{background:#fff;color:#222;border:0;border-radius:40px;padding:14px 26px;font-weight:700;font-size:1.05rem;cursor:pointer;display:flex;gap:10px;align-items:center;margin-top:16px;box-shadow:0 8px 24px #0004}
+.gb b{font-size:1.3rem;background:conic-gradient(#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;color:transparent}
+/* notice */
+.nt{padding:0;overflow:hidden;position:relative;text-align:center;border-radius:26px}
+.nt .hd{background:linear-gradient(140deg,var(--dk),var(--em2));color:#fff;padding:18px 20px 16px}.nt .hd small{opacity:.85}
+.nt img{width:100%;max-height:260px;object-fit:cover;display:block}
+.nt .bd{padding:16px 18px 20px}
+.toast{position:fixed;left:50%;top:70px;transform:translate(-50%,-20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:30px;z-index:90;opacity:0;transition:.3s;pointer-events:none;font-weight:500}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+#splash{position:fixed;inset:0;z-index:100;background:linear-gradient(150deg,var(--dk),var(--em2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+#splash img{width:96px;border-radius:24px;box-shadow:0 12px 30px #0004}
+.sp{width:34px;height:34px;border:4px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn:disabled{opacity:.6;cursor:default}
+@media(prefers-reduced-motion:reduce){.mq .in{animation:none}.sheet,.ov,.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<div id="splash"><img src="logo.png" alt=""><div class="sp"></div></div>
+<section id="login" class="hide">
+  <img src="logo.png" alt="Go-নোয়াখালী">
+  <h1>Go-নোয়াখালী</h1>
+  <p>নোয়াখালীর পথে সহজে সঙ্গী খুঁজুন — সম্পূর্ণ বিনামূল্যে, কোনো সার্ভিস চার্জ ছাড়া।</p>
+  <button id="gBtn" class="gb"><b>G</b> Google দিয়ে শুরু করুন</button>
+  <p id="lerr" style="color:#ffd9d9"></p>
+</section>
+
+<div id="app" class="hide">
+  <div class="top"><img class="lg" src="logo.png" alt=""><b>Go-নোয়াখালী</b><button class="avb" id="avBtn" aria-label="প্রোফাইল"><img id="topAv" alt=""></button></div>
+
+  <div class="hero"><div class="wrap" style="padding:0">
+    <h1 id="hi">স্বাগতম 👋</h1><p>কোথা থেকে কোথায় যাবেন? পছন্দের ট্রিপ বেছে নিন।</p>
+  </div></div>
+
+  <div class="wrap">
+    <div class="srch">
+      <div class="fld" id="qF"><i class="dot"></i><div><small>কোথা থেকে</small><b id="qFv" class="ph">সব জায়গা</b></div></div>
+      <div class="sep"></div>
+      <div class="fld" id="qT"><i class="dot e"></i><div><small>কোথায় যাবেন</small><b id="qTv" class="ph">সব গন্তব্য</b></div></div>
+      <button class="swap" id="swap" aria-label="অদলবদল">⇅</button>
+    </div>
+
+    <div class="nb"><button class="btn y sm hide" id="ib">📲 অ্যাপ ইনস্টল করুন</button><button class="btn o sm hide" id="nbBtn">🔔 নোটিশ নোটিফিকেশন চালু করুন</button></div>
+    <div class="chips" id="chips"></div>
+
+    <div class="sec"><h2>আসন্ন ট্রিপ<span class="info" data-i="নিচের তালিকায় সামনের দিনের ট্রিপগুলো আছে। বাম পাশে গাড়ির ধরন, ডান পাশে কোথা থেকে কোথায় যাবে তা দেখানো আছে। কোনো ট্রিপে চাপ দিলে চালকের নাম, ছবি ও ফোন নম্বর দেখতে পাবেন।">i</span></h2></div>
+    <div id="trips"></div>
+
+    <div class="sec"><h2>সবার মতামত</h2><button class="btn y sm" id="rvOpen">✍️ মতামত দিন</button></div>
+    <div class="rvc"><div class="avg"><b id="avgN">—</b><div><div class="st" id="avgS"></div><small class="mut" id="avgC">এখনো কোনো মতামত নেই</small></div></div><div class="mq"><div class="in" id="rvs"></div></div></div>
+  </div>
+
+  <section class="about"><div class="in">
+    <h4>Go-নোয়াখালী সম্পর্কে</h4>
+    <p>এটি একটি অলাভজনক সেবা। এখানে কারো কাছ থেকে কোনো সার্ভিস চার্জ নেওয়া হয় না। শুধুমাত্র ট্রিপ যিনি যোগ করেছেন (চালক) তার ছবি, নাম ও ফোন নম্বর দেখানো হয়; সাধারণ ব্যবহারকারী বা যাত্রীর তথ্য কাউকে দেখানো হয় না।</p>
+    <p>ডেভেলপার: নোয়াখালীর সন্তান <b>মো. আবদুল্লাহ ফাহিম</b> — <a href="https://mdabdullahfahim.github.io" target="_blank" rel="noopener">mdabdullahfahim.github.io</a></p>
+    <div class="soc"><a href="https://www.facebook.com/go.noakhali" target="_blank" rel="noopener">👍 ফেসবুক পেজ</a><a href="https://www.facebook.com/groups/go.noakhali" target="_blank" rel="noopener">👥 গ্রুপে যোগ দিন</a></div>
+  </div></section>
+
+  <button class="fab hide" id="fab"><i>＋</i> ট্রিপ যোগ করুন</button>
+</div>
+
+<div class="ov" id="ov"><div class="sheet"><div class="grab"></div><div id="sb"></div></div></div>
+<div class="ov z2" id="ov2"><div class="sheet"><div class="grab"></div><div id="sb2"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getMessaging,getToken,isSupported}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
+import{getFirestore,doc,getDoc,setDoc,updateDoc,addDoc,collection,onSnapshot,query,where,orderBy,limit,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyDV9KJhYmEjHYt6aNkA1daJEPQieADmSY0",authDomain:"go-to-noakhali.firebaseapp.com",projectId:"go-to-noakhali",storageBucket:"go-to-noakhali.firebasestorage.app",messagingSenderId:"1006423475898",appId:"1:1006423475898:web:b716dccb01605615bde483"});
+const auth=getAuth(app),db=getFirestore(app),$=i=>document.getElementById(i);
+const PRIMARY=["হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর, কুর্মিটোলা, ঢাকা","যাত্রাবাড়ী, ঢাকা","শাহ আমানত আন্তর্জাতিক বিমানবন্দর, পতেঙ্গা, চট্টগ্রাম","কক্সবাজার"];
+const DEST="মাইজদী কোর্ট, সদর, নোয়াখালী";
+const VEH=[["car","🚗","কার","Car"],["ambulance","🚑","অ্যাম্বুলেন্স","Ambulance"],["motorcycle","🏍️","মোটরসাইকেল","Motorcycle"],["microbus","🚐","মাইক্রোবাস","Microbus"]];
+const bn=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const phoneOk=p=>/^01[3-9]\d{8}$/.test(p);
+let me=null,places=[...PRIMARY,DEST],trips=[],qf="",qt="",vf="all",F={},rate=5,lock=false;
+
+/* ---------- sheets ---------- */
+const ov=$("ov"),ov2=$("ov2");
+const open=h=>{$("sb").innerHTML=h;ov.classList.add("on")};
+const close=()=>ov.classList.remove("on");
+const top=h=>{$("sb2").innerHTML=h;ov2.onclick=e=>{if(e.target==ov2)close2()};ov2.classList.add("on")};
+const close2=()=>ov2.classList.remove("on");
+ov.onclick=e=>{if(e.target==ov&&!lock)close()};
+const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2400)};
+document.addEventListener("click",e=>{const i=e.target.closest(".info");if(i){e.stopPropagation();top(`<h3>ℹ️ সহজ ব্যাখ্যা</h3><p>${esc(i.dataset.i)}</p><button class="btn" style="margin-top:14px" id="okI">বুঝেছি</button>`);$("okI").onclick=close2}});
+
+/* ---------- auth ---------- */
+$("gBtn").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("lerr").textContent="লগইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"}};
+onAuthStateChanged(auth,async u=>{
+  if(!u){me=null;$("splash").classList.add("hide");$("login").classList.remove("hide");$("app").classList.add("hide");return}
+  const ref=doc(db,"users",u.uid),s=await getDoc(ref);
+  me=s.exists()?{...s.data(),uid:u.uid}:{uid:u.uid,name:u.displayName||"",photo:u.photoURL||"",email:u.email,phone:"",role:""};
+  if(!s.exists())await setDoc(ref,{...me,createdAt:serverTimestamp()});
+  $("login").classList.add("hide");$("app").classList.remove("hide");$("splash").classList.add("hide");
+  render();
+  if(!me.phone)askPhone(true);else if(!me.role)askRole();
+  start();
+});
+const save=async d=>{Object.assign(me,d);await updateDoc(doc(db,"users",me.uid),d);render()};
+
+function askPhone(next){
+  lock=next;
+  open(`<h3>📱 মোবাইল নম্বর দিন</h3><p class="mut">১১ ডিজিটের বাংলাদেশি নম্বর দিন (যেমন: 01888888888)</p><input class="t" id="phIn" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX" value="${esc(me.phone)}"><p id="phE" style="color:var(--red);min-height:24px"></p><button class="btn" id="phOk">সংরক্ষণ করুন</button>`);
+  $("phOk").onclick=async()=>{const v=$("phIn").value.trim();if(!phoneOk(v)){$("phE").textContent="সঠিক ১১ ডিজিটের নম্বর দিন (01 দিয়ে শুরু)।";return}
+    await save({phone:v});lock=false;close();toast("নম্বর সংরক্ষিত হয়েছে ✓");if(next&&!me.role)setTimeout(askRole,300)};
+}
+function askRole(){
+  lock=true;
+  open(`<h3>আপনি কে? <small class="mut">Who are you?</small></h3><div class="row"><div class="op big" data-r="driver" style="padding:20px 6px"><span style="font-size:2.6rem">🧑‍✈️</span>চালক<br><small class="mut">Driver</small></div><div class="op big" data-r="passenger" style="padding:20px 6px"><span style="font-size:2.6rem">🧍</span>যাত্রী<br><small class="mut">Passenger</small></div></div>`);
+  document.querySelectorAll("[data-r]").forEach(o=>o.onclick=async()=>{await save({role:o.dataset.r});lock=false;close();toast("স্বাগতম! 🎉")});
+}
+function profile(){
+  open(`<h3>আমার প্রোফাইল</h3><div class="pf"><img class="av" src="${esc(me.photo)||"logo.png"}" alt=""><div><b style="font-size:1.15rem">${esc(me.name)}</b><br><span class="pill g">${me.role=="driver"?"🧑‍✈️ চালক":"🧍 যাত্রী"}</span><br><span class="mut">📞 ${esc(me.phone)}</span></div></div>
+  <label class="btn o" style="cursor:pointer">📷 ছবি পরিবর্তন করুন<input id="pic" type="file" accept="image/*" hidden></label>
+  <button class="btn o" id="eph">📞 নম্বর পরিবর্তন করুন</button>
+  <button class="btn r" id="lo">লগআউট</button>`);
+  $("eph").onclick=()=>askPhone(false);$("lo").onclick=()=>{close();signOut(auth)};
+  $("pic").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=async()=>{const c=document.createElement("canvas");c.width=c.height=200;const x=c.getContext("2d"),m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,200,200);await save({photo:c.toDataURL("image/jpeg",.8)});close();toast("ছবি বদলানো হয়েছে ✓")};im.src=URL.createObjectURL(f)};
+}
+$("avBtn").onclick=profile;
+function render(){
+  $("topAv").src=me.photo||"logo.png";
+  $("hi").textContent="স্বাগতম, "+(me.name||"").split(" ")[0]+" 👋";
+  $("fab").classList.toggle("hide",me.role!="driver");
+}
+
+/* ---------- place picker ---------- */
+function pick(title,allowNew,allowAny){return new Promise(res=>{
+  top(`<h3>${title}</h3><input class="t" id="pq" placeholder="🔍 স্থানের নাম খুঁজুন" autocomplete="off"><div id="pls"></div>`);
+  const dr=()=>{const q=$("pq").value.trim();
+    let h=(allowAny&&!q?`<div class="pi" data-v="">🌐 সব জায়গা</div>`:"")+places.filter(p=>p.includes(q)).map(p=>`<div class="pi" data-v="${esc(p)}">📍 ${esc(p)}</div>`).join("");
+    if(allowNew&&q&&!places.includes(q))h+=`<div class="pi new" data-v="${esc(q)}">➕ “${esc(q)}” নতুন স্থান হিসেবে যোগ করুন</div>`;
+    $("pls").innerHTML=h||"<p class='mut' style='padding:10px'>কিছু পাওয়া যায়নি</p>";
+    document.querySelectorAll(".pi").forEach(e=>e.onclick=()=>{close2();res(e.dataset.v)})};
+  $("pq").oninput=dr;dr();
+  ov2.onclick=e=>{if(e.target==ov2){close2();res(null)}};
+})}
+const setQ=()=>{const a=$("qFv"),b=$("qTv");a.textContent=qf||"সব জায়গা";a.className=qf?"":"ph";b.textContent=qt||"সব গন্তব্য";b.className=qt?"":"ph";drawTrips()};
+$("qF").onclick=async()=>{const v=await pick("কোথা থেকে যাত্রা?",false,true);if(v!==null){qf=v;setQ()}};
+$("qT").onclick=async()=>{const v=await pick("কোথায় যাবেন?",false,true);if(v!==null){qt=v;setQ()}};
+$("swap").onclick=e=>{e.stopPropagation();[qf,qt]=[qt,qf];setQ()};
+$("chips").innerHTML=`<div class="chip on" data-c="all">সব গাড়ি</div>`+VEH.map(v=>`<div class="chip" data-c="${v[0]}">${v[1]} ${v[2]}</div>`).join("");
+document.querySelectorAll("[data-c]").forEach(c=>c.onclick=()=>{vf=c.dataset.c;document.querySelectorAll("[data-c]").forEach(x=>x.classList.toggle("on",x==c));drawTrips()});
+
+/* ---------- add trip ---------- */
+const today=()=>{const t=new Date();return new Date(t-t.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+$("fab").onclick=()=>{
+  F={from:"",to:DEST,v:"car",s:1};
+  open(`<h3>🚗 নতুন ট্রিপ যোগ করুন<span class="info" data-i="আপনি কোথা থেকে নোয়াখালী যাচ্ছেন, কোন গাড়িতে, কয়টি সিট খালি এবং কখন রওনা দেবেন—এগুলো দিয়ে ট্রিপ যোগ করুন। ট্রিপ যোগ হলেই সবাই দেখতে পাবে।">i</span></h3>
+  <div class="f2 fld" id="ff"><i class="dot"></i><div><small>কোথা থেকে</small><b id="ffv" class="ph">স্থান বাছুন</b></div></div>
+  <div class="f2 fld" id="ft"><i class="dot e"></i><div><small>গন্তব্য</small><b id="ftv">${DEST}</b></div></div>
+  <label class="l">গাড়ির ধরন / Vehicle</label>
+  <div class="g4" id="vO">${VEH.map(v=>`<div class="op ${v[0]=="car"?"on":""}" data-v="${v[0]}"><span>${v[1]}</span>${v[2]}<br><small>${v[3]}</small></div>`).join("")}</div>
+  <label class="l">খালি সিট / Seats<span class="info" data-i="যাত্রীর জন্য গাড়িতে কয়টি সিট খালি আছে তা বেছে নিন।">i</span></label>
+  <div class="g4" id="sO">${[1,2,3,4].map(n=>`<div class="op big ${n==1?"on":""}" data-s="${n}">${bn(n)}</div>`).join("")}</div>
+  <div class="row"><div><label class="l">তারিখ / Date</label><input class="t" id="fd" type="date" min="${today()}" value="${today()}"></div><div><label class="l">সময় / Time</label><input class="t" id="fm" type="time"></div></div>
+  <button class="btn" id="go">ট্রিপ প্রকাশ করুন</button>`);
+  $("ff").onclick=async()=>{const v=await pick("কোথা থেকে যাত্রা?",true);if(v){F.from=v;$("ffv").textContent=v;$("ffv").className=""}};
+  $("ft").onclick=async()=>{const v=await pick("গন্তব্য কোথায়?",true);if(v){F.to=v;$("ftv").textContent=v}};
+  document.querySelectorAll("[data-v]").forEach(o=>o.onclick=()=>{F.v=o.dataset.v;document.querySelectorAll("#vO .op").forEach(x=>x.classList.toggle("on",x==o))});
+  document.querySelectorAll("[data-s]").forEach(o=>o.onclick=()=>{F.s=+o.dataset.s;document.querySelectorAll("#sO .op").forEach(x=>x.classList.toggle("on",x==o))});
+  $("go").onclick=async()=>{
+    const date=$("fd").value,time=$("fm").value;
+    if(!F.from||!F.to||!date||!time)return toast("সব তথ্য পূরণ করুন (স্থান, তারিখ, সময়)");
+    if(F.from==F.to)return toast("শুরু ও গন্তব্য একই হতে পারে না");
+    const ts=new Date(date+"T"+time).getTime();if(ts<Date.now())return toast("অতীতের সময় দেওয়া যাবে না");
+    for(const p of[F.from,F.to])if(!places.includes(p))await addDoc(collection(db,"places"),{name:p});
+    await addDoc(collection(db,"trips"),{driverId:me.uid,driverName:me.name,driverPhoto:me.photo||"",driverPhone:me.phone,from:F.from,to:F.to,vehicle:F.v,seats:F.s,date,time,ts,status:"active",createdAt:serverTimestamp()});
+    close();toast("✅ ট্রিপ যোগ হয়েছে");
+  };
+};
+
+/* ---------- trips ---------- */
+const fmtT=t=>{const[h,m]=t.split(":").map(Number);return bn(((h+11)%12)+1)+":"+bn(String(m).padStart(2,"0"))+" "+(h<5?"রাত":h<12?"সকাল":h<16?"দুপুর":h<18?"বিকাল":"রাত")};
+const fmtD=d=>{const a=new Date(d+"T00:00"),b=new Date(today()+"T00:00"),n=Math.round((a-b)/864e5);return n==0?"আজ":n==1?"আগামীকাল":a.toLocaleDateString("bn-BD",{day:"numeric",month:"long"})};
+function drawTrips(){
+  const l=trips.filter(t=>t.ts>Date.now()-36e5&&(!qf||t.from==qf)&&(!qt||t.to==qt)&&(vf=="all"||t.vehicle==vf));
+  $("trips").innerHTML=l.length?l.map(t=>{const v=VEH.find(x=>x[0]==t.vehicle);
+    return`<div class="tc" data-t="${t.id}"><div class="vi"><span>${v[1]}</span><small>${v[2]}</small></div><div class="tb"><div class="rt"><div>${esc(t.from)}</div><div>${esc(t.to)}</div></div><div class="mr"><span class="pill">📅 ${fmtD(t.date)}</span><span class="pill tm">🕒 ${fmtT(t.time)}</span><span class="pill s">💺 ${bn(t.seats)}টি সিট খালি</span></div></div></div>`}).join("")
+    :`<div class="empty"><span>🛣️</span><b>কোনো আসন্ন ট্রিপ পাওয়া যায়নি</b><p>ফিল্টার বদলে দেখুন অথবা পরে আবার আসুন।</p></div>`;
+  document.querySelectorAll("[data-t]").forEach(e=>e.onclick=()=>detail(e.dataset.t));
+}
+function detail(id){
+  const t=trips.find(x=>x.id==id);if(!t)return;const v=VEH.find(x=>x[0]==t.vehicle);
+  open(`<h3>ট্রিপের বিবরণ</h3>
+  <div class="tc" style="cursor:default;box-shadow:none;border:1.5px solid var(--line)"><div class="vi"><span>${v[1]}</span><small>${v[2]}<br>${v[3]}</small></div><div class="tb"><div class="rt"><div>${esc(t.from)}</div><div>${esc(t.to)}</div></div><div class="mr"><span class="pill">📅 ${fmtD(t.date)}</span><span class="pill tm">🕒 ${fmtT(t.time)}</span><span class="pill s">💺 ${bn(t.seats)}টি সিট খালি</span></div></div></div>
+  <label class="l" style="margin:16px 0 8px">চালকের তথ্য</label>
+  <div class="pf"><img class="av" src="${esc(t.driverPhoto)||"logo.png"}" alt=""><div><b style="font-size:1.1rem">${esc(t.driverName)}</b><br><a href="tel:${esc(t.driverPhone)}" class="mut">📞 ${esc(t.driverPhone)}</a></div></div>
+  <a class="btn y" href="tel:${esc(t.driverPhone)}">📞 চালককে কল করুন</a>
+  ${t.driverId==me.uid?`<button class="btn r" id="cx">ট্রিপ বাতিল করুন</button><p class="mut" style="font-size:.85rem;margin-top:6px">যাত্রী ফোনে পেয়ে গেলে ট্রিপ বাতিল করুন।</p>`:""}`);
+  if($("cx"))$("cx").onclick=()=>{top(`<h3>ট্রিপ বাতিল করবেন?</h3><p class="mut">বাতিল করলে ট্রিপটি আর কেউ দেখতে পাবে না।</p><div class="row" style="margin-top:14px"><div><button class="btn o" id="no">না</button></div><div><button class="btn" id="yes" style="background:var(--red)">হ্যাঁ, বাতিল</button></div></div>`);
+    $("no").onclick=close2;$("yes").onclick=async()=>{await updateDoc(doc(db,"trips",id),{status:"cancelled"});close2();close();toast("ট্রিপ বাতিল হয়েছে")}};
+}
+
+/* ---------- reviews ---------- */
+$("rvOpen").onclick=()=>{
+  rate=5;
+  open(`<h3>✍️ আপনার মতামত দিন</h3><div class="stars" id="stars"></div><textarea id="rvT" rows="3" maxlength="200" placeholder="Go-নোয়াখালী সম্পর্কে আপনার অভিজ্ঞতা লিখুন..."></textarea><button class="btn" id="rvB">মতামত পাঠান</button>`);
+  const paint=()=>{$("stars").innerHTML=[1,2,3,4,5].map(n=>`<span data-k="${n}" style="opacity:${n<=rate?1:.25}">★</span>`).join("");document.querySelectorAll("[data-k]").forEach(s=>s.onclick=()=>{rate=+s.dataset.k;paint()})};paint();
+  let busy=false;
+  $("rvB").onclick=async()=>{
+    if(busy)return;const t=$("rvT").value.trim();if(!t)return toast("মতামত লিখুন");
+    busy=true;$("rvB").disabled=true;$("rvB").textContent="পাঠানো হচ্ছে...";
+    let h=5381;for(const ch of t)h=((h*33)^ch.charCodeAt(0))>>>0;
+    try{await setDoc(doc(db,"reviews",me.uid+"_"+h.toString(36)),{uid:me.uid,name:me.name,photo:me.photo||"",text:t,rating:rate,ts:Date.now()});toast("ধন্যবাদ! মতামত যোগ হয়েছে ✓")}
+    catch(e){toast("এই মতামতটি আগেই যোগ করা হয়েছে")}
+    close();
+  };
+};
+
+/* ---------- PWA & notifications ---------- */
+let dip=null;
+const VAPID_KEY="BNFuNdxvJm_79J8XZcwYBqpB3P9ia_1DzWKWBdyUvIrlJoG-uwsLuK5P4WXx3m1xCcnl06KR7CuTfwk6Y7nCOAo";
+let canPush=false;
+const ui=()=>{$("nbBtn").classList.toggle("hide",!canPush||!("Notification" in window)||Notification.permission!="default");$("ib").classList.toggle("hide",!dip)};
+isSupported().then(v=>{canPush=v;ui()}).catch(()=>{});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;ui()});
+window.addEventListener("appinstalled",()=>{dip=null;ui()});
+$("ib").onclick=async()=>{if(!dip)return;dip.prompt();await dip.userChoice;dip=null;ui()};
+async function regToken(){
+  if(!canPush||!me||Notification.permission!="granted")return;
+  try{const reg=await navigator.serviceWorker.ready;
+    const tk=await getToken(getMessaging(app),{vapidKey:VAPID_KEY,serviceWorkerRegistration:reg});
+    if(tk)await setDoc(doc(db,"fcmTokens",tk),{uid:me.uid,ts:Date.now()})}catch(e){console.warn("push",e)}
+}
+$("nbBtn").onclick=async()=>{const p=await Notification.requestPermission();ui();if(p=="granted"){await regToken();toast("নোটিফিকেশন চালু হয়েছে 🔔")}else toast("নোটিফিকেশন বন্ধ আছে")};
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+ui();
+async function pushNotice(n){
+  if(!("Notification" in window)||Notification.permission!="granted")return;
+  const key=[n.title,n.image||"",n.ts||""].join("|");
+  try{if(localStorage.getItem("lastNotice")==key)return;localStorage.setItem("lastNotice",key)}catch(e){}
+  const o={body:"নোটিশটি দেখতে ট্যাপ করুন",icon:"logo.png",badge:"logo.png",tag:"go-notice-"+(n.ts||"")};
+  if(n.image)o.image=n.image;
+  try{const r=await navigator.serviceWorker.ready;r.showNotification(n.title,o)}catch(e){try{new Notification(n.title,o)}catch(_){}}
+}
+
+/* ---------- live data ---------- */
+let started=false;
+function start(){
+  if(started)return;started=true;regToken();
+  onSnapshot(collection(db,"places"),s=>{places=[...new Set([...PRIMARY,DEST,...s.docs.map(d=>d.data().name)])]});
+  onSnapshot(query(collection(db,"trips"),where("status","==","active")),s=>{trips=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);drawTrips()});
+  onSnapshot(query(collection(db,"reviews"),orderBy("ts","desc"),limit(30)),s=>{
+    const r=s.docs.map(d=>d.data());if(!r.length)return;
+    const a=r.reduce((x,y)=>x+y.rating,0)/r.length;
+    $("avgN").textContent=bn(a.toFixed(1));$("avgS").textContent="★".repeat(Math.round(a));$("avgC").textContent=bn(r.length)+" জনের মতামত";
+    $("rvs").innerHTML=r.map(x=>`<div class="rv"><img src="${esc(x.photo)||"logo.png"}" alt=""><div><b>${esc(x.name)}</b> <span class="st" style="font-size:.8rem">${"★".repeat(x.rating)}</span><q>${esc(x.text)}</q></div></div>`).join("");
+  });
+  onSnapshot(doc(db,"notice","current"),s=>{
+    const n=s.data();if(!n||!n.active||!n.title)return;pushNotice(n);
+    top(`<div class="nt"><div class="hd"><small>📢 গুরুত্বপূর্ণ নোটিশ</small><h3 style="margin:4px 0 0">${esc(n.title)}</h3></div>${n.image?`<img src="${esc(n.image)}" alt="">`:""}<div class="bd"><button class="btn" id="nc">বুঝেছি, বন্ধ করুন</button></div></div>`);
+    $("nc").onclick=close2;
+  });
+}
+</script>
+</body>
+</html>
